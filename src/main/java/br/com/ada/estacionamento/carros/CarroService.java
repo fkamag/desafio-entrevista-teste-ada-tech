@@ -26,13 +26,22 @@ public class CarroService {
         return carroRepository.findAll();
     }
 
-    public void estacionar(Carro carro){
-        Integer numberVaga = carro.getVaga().getNumero();
-        Vaga vaga = vagaRepository.findById(numberVaga).orElseThrow();
+    public String estacionar(Carro carro){
+        Integer numberVaga = vagaRepository.countarVagasLivres();
+        if (numberVaga == 0) {
+            throw new RuntimeException("Todas as vagas estão ocupadas");
+        }
+        Vaga vaga = vagaRepository.findById(carro.getVaga().getNumero()).orElseThrow();
         if (vaga.isOcupada()) {
             throw new RuntimeException("Vaga ocupada");
         }
-        carroRepository.save(carro);
+        vaga.setOcupada(true);
+        vaga.setCarro(carro);
+
+        vagaRepository.save(vaga);
+
+        return String.format("Carro placa %s estacionado na vaga %d",
+            carro.getPlaca(), vaga.getNumero());
     }
 
 }

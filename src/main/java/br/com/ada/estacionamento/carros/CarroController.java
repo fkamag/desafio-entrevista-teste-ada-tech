@@ -31,9 +31,9 @@ public class CarroController {
     }
 
     @PostMapping("/vaga")
-    public ResponseEntity<Carro> estacionar(@RequestBody Carro carro){
-        service.estacionar(carro);
-        return ResponseEntity.ok(carro);
+    public ResponseEntity<String> estacionar(@RequestBody Carro carro){
+        String result = service.estacionar(carro);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @GetMapping("/carro")
