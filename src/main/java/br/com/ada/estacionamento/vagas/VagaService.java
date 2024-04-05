@@ -26,4 +26,13 @@ public class VagaService {
         return repository.findAll();
     }
 
+    public String retirarCarro(Integer id) {
+        Vaga vaga = repository.findById(id)
+            .orElseThrow();
+        vaga.setOcupada(false);
+
+        repository.save(vaga);
+
+        return String.format("Veículo retirado da vaga %d", id);
+    }
 }
