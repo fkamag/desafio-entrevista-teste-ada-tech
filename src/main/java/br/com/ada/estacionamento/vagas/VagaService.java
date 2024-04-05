@@ -1,6 +1,7 @@
 package br.com.ada.estacionamento.vagas;
 
 import jakarta.annotation.PostConstruct;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,12 @@ public class VagaService {
         }
     }
 
+    public Vaga getVaga(Integer number) {
+        return repository.findById(number).orElseThrow();
+    }
 
+    public List<Vaga> getVagas() {
+        return repository.findAll();
+    }
 
 }

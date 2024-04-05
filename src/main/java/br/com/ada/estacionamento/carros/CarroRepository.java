@@ -1,6 +1,6 @@
 package br.com.ada.estacionamento.carros;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CarroRepository extends CrudRepository<Carro, String> {
+public interface CarroRepository extends JpaRepository<Carro, String> {
 }
